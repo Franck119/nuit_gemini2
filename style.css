@@ -7,7 +7,9 @@
     --color-accent-blue: #0A3D62;
     --color-shadow: rgba(0, 0, 0, 0.7);
     --color-silhouette-dark: #000000; /* Pure black for silhouette contrast */
-    --color-silhouette-overlay: rgba(5, 5, 15, 0.85); /* Dark semi-transparent overlay */
+    --color-container-bg: rgba(10, 10, 32, 0.95); /* Main container background */
+    --color-fade-start: rgba(10, 10, 32, 0.0);
+    --color-fade-end: rgba(0, 0, 0, 0.85);
 }
 
 /* --- Base Styling --- */
@@ -30,7 +32,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Star Background Animation (Unchanged) --- */
+/* --- Star and Silhouette Background Animation (UPDATED) --- */
 .stars {
     position: fixed;
     top: 0;
@@ -39,7 +41,17 @@ body {
     height: 100%;
     background: transparent;
     z-index: -2;
+    
+    /* Combining the stars (radial gradients) with the skyline effect (linear/radial gradients) */
     background-image: 
+        /* 1. The Silhouette Effect (Anchored near the bottom) */
+        linear-gradient(to bottom, var(--color-fade-start) 0%, var(--color-fade-end) 90%),
+        radial-gradient(circle at 10% 100%, transparent 150px, var(--color-silhouette-dark) 150px),
+        radial-gradient(circle at 25% 100%, transparent 100px, var(--color-silhouette-dark) 100px),
+        radial-gradient(circle at 75% 100%, transparent 120px, var(--color-silhouette-dark) 120px),
+        linear-gradient(to top, var(--color-silhouette-dark) 0%, var(--color-silhouette-dark) 100%),
+        
+        /* 2. The Star Field (Moving) */
         radial-gradient(2px 2px at 20px 30px, var(--color-white), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 40px 70px, var(--color-white), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 50px 160px, var(--color-light-gold), rgba(0,0,0,0)),
@@ -47,40 +59,38 @@ body {
         radial-gradient(2px 2px at 150px 150px, var(--color-white), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 200px 220px, var(--color-light-gold), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 300px 50px, var(--color-white), rgba(0,0,0,0)); 
-    background-size: 300px 300px;
+        
+    /* Define sizes for all backgrounds in the same order */
+    background-size: 
+        100% 100%, /* Silhouette gradient 1 */
+        150% 100%, /* Silhouette gradient 2 */
+        150% 100%, /* Silhouette gradient 3 */
+        150% 100%, /* Silhouette gradient 4 */
+        100% 100%, /* Silhouette gradient 5 */
+        
+        /* Star sizes (Keep these consistent) */
+        300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px;
+        
+    /* Define positions for all backgrounds in the same order */
+    background-position: 
+        /* Silhouette positions (Anchored to the bottom, NOT moving) */
+        bottom, bottom, bottom, bottom, bottom,
+        
+        /* Star positions (These are the ones that will move) */
+        0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+        
     animation: twinkle 60s linear infinite;
 }
 
 @keyframes twinkle {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
+    /* Only the star positions change, the silhouette position remains 'bottom' */
+    0% { background-position: bottom, bottom, bottom, bottom, bottom, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
+    100% { background-position: bottom, bottom, bottom, bottom, bottom, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%; }
 }
 
-/* --- Moscow Skyline Overlay (UPDATED) --- */
+/* --- Remove the static ::before element that was causing conflict --- */
 .invitation-container::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 350px; /* Increased height for prominence */
-    z-index: -1;
-    
-    /* Complex, high-contrast SVG of a stylized Moscow/Kremlin skyline (using fill='black') */
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23000000' fill-opacity='1' d='M0,192L48,192C96,192,192,192,288,181.3C384,171,480,149,576,160C672,171,768,213,864,224C960,235,1056,213,1152,181.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
-    
-    background-repeat: no-repeat;
-    background-position: bottom center;
-    background-size: cover;
-    opacity: 0.9; /* High opacity to simulate the solid silhouette from the design */
-    transition: all 0.5s;
-    
-    /* Add a subtle dark overlay to blend the skyline with the container */
-    background-color: var(--color-silhouette-overlay); 
-    mix-blend-mode: multiply; /* Helps the dark color stand out over the stars */
-
-    /* Ensure the main container background shows through the transparent parts of the SVG */
-    box-shadow: 0 50px 80px 0 var(--color-navy) inset;
+    content: none;
 }
 
 
@@ -88,8 +98,7 @@ body {
     max-width: 900px;
     width: 95%;
     padding: 40px;
-    /* Updated background to ensure the overlay blends well */
-    background: rgba(10, 10, 32, 0.95); 
+    background: var(--color-container-bg); 
     box-shadow: 0 10px 40px var(--color-shadow);
     border-radius: 15px;
     border: 1px solid rgba(255, 255, 255, 0.15);
@@ -194,7 +203,7 @@ header {
     color: #CC0000; /* Red for location pin */
 }
 
-/* --- Countdown Timer --- */
+/* --- Countdown Timer (Unchanged) --- */
 .countdown-timer {
     display: flex;
     justify-content: center;
@@ -235,7 +244,7 @@ header {
     line-height: 1.5;
 }
 
-/* --- Details Section (Stylized Boxes) --- */
+/* --- Details Section (Unchanged) --- */
 .details-section {
     display: flex;
     justify-content: space-between;
@@ -300,7 +309,7 @@ header {
 }
 
 
-/* --- Registration Form --- */
+/* --- Registration Form (Unchanged) --- */
 .registration-form-section {
     padding: 30px;
     border-radius: 10px;
@@ -387,7 +396,7 @@ select {
     text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
 }
 
-/* --- Media Queries for Responsiveness --- */
+/* --- Media Queries for Responsiveness (Unchanged) --- */
 @media (max-width: 768px) {
     .title-event {
         font-size: 2.5rem;
