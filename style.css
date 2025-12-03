@@ -1,15 +1,11 @@
 /* --- Color Variables --- */
 :root {
-    --color-navy: #0A0A20; /* Darker Navy for space effect */
+    --color-navy: #0A0A20; 
     --color-gold: #C5B358;
     --color-white: #FFFFFF;
     --color-light-gold: #FFD700;
-    --color-accent-blue: #0A3D62;
     --color-shadow: rgba(0, 0, 0, 0.7);
-    --color-silhouette-dark: #000000; /* Pure black for silhouette contrast */
-    --color-container-bg: rgba(10, 10, 32, 0.95); /* Main container background */
-    --color-fade-start: rgba(10, 10, 32, 0.0);
-    --color-fade-end: rgba(0, 0, 0, 0.85);
+    --color-container-bg: rgba(10, 10, 32, 0.95); 
 }
 
 /* --- Base Styling --- */
@@ -32,7 +28,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Star and Silhouette Background Animation (UPDATED) --- */
+/* --- Star Background Animation (Restored to only stars) --- */
 .stars {
     position: fixed;
     top: 0;
@@ -41,17 +37,8 @@ body {
     height: 100%;
     background: transparent;
     z-index: -2;
-    
-    /* Combining the stars (radial gradients) with the skyline effect (linear/radial gradients) */
+    /* Star field only */
     background-image: 
-        /* 1. The Silhouette Effect (Anchored near the bottom) */
-        linear-gradient(to bottom, var(--color-fade-start) 0%, var(--color-fade-end) 90%),
-        radial-gradient(circle at 10% 100%, transparent 150px, var(--color-silhouette-dark) 150px),
-        radial-gradient(circle at 25% 100%, transparent 100px, var(--color-silhouette-dark) 100px),
-        radial-gradient(circle at 75% 100%, transparent 120px, var(--color-silhouette-dark) 120px),
-        linear-gradient(to top, var(--color-silhouette-dark) 0%, var(--color-silhouette-dark) 100%),
-        
-        /* 2. The Star Field (Moving) */
         radial-gradient(2px 2px at 20px 30px, var(--color-white), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 40px 70px, var(--color-white), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 50px 160px, var(--color-light-gold), rgba(0,0,0,0)),
@@ -60,37 +47,35 @@ body {
         radial-gradient(2px 2px at 200px 220px, var(--color-light-gold), rgba(0,0,0,0)),
         radial-gradient(2px 2px at 300px 50px, var(--color-white), rgba(0,0,0,0)); 
         
-    /* Define sizes for all backgrounds in the same order */
-    background-size: 
-        100% 100%, /* Silhouette gradient 1 */
-        150% 100%, /* Silhouette gradient 2 */
-        150% 100%, /* Silhouette gradient 3 */
-        150% 100%, /* Silhouette gradient 4 */
-        100% 100%, /* Silhouette gradient 5 */
-        
-        /* Star sizes (Keep these consistent) */
-        300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px, 300px 300px;
-        
-    /* Define positions for all backgrounds in the same order */
-    background-position: 
-        /* Silhouette positions (Anchored to the bottom, NOT moving) */
-        bottom, bottom, bottom, bottom, bottom,
-        
-        /* Star positions (These are the ones that will move) */
-        0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
-        
+    background-size: 300px 300px;
+    background-position: 0% 0%;
     animation: twinkle 60s linear infinite;
 }
 
 @keyframes twinkle {
-    /* Only the star positions change, the silhouette position remains 'bottom' */
-    0% { background-position: bottom, bottom, bottom, bottom, bottom, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%; }
-    100% { background-position: bottom, bottom, bottom, bottom, bottom, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%, 100% 100%; }
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
-/* --- Remove the static ::before element that was causing conflict --- */
+/* --- Moscow Silhouette Overlay (Using Image Asset) --- */
 .invitation-container::before {
-    content: none;
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 350px;
+    z-index: -1;
+    
+    /* ** THIS USES THE NEW IMAGE FILE ** */
+    background-image: url('moscow-silhouette.png'); 
+    background-repeat: repeat-x; /* If the image is seamless, it can repeat */
+    background-position: bottom center;
+    background-size: cover; /* Ensures it covers the width */
+    opacity: 0.9;
+    
+    /* Subtle fade to blend the black silhouette with the navy background */
+    box-shadow: 0 -50px 50px -20px var(--color-container-bg) inset;
 }
 
 
