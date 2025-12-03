@@ -28,7 +28,7 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Star Background Animation (Restored to only stars) --- */
+/* --- Star Background Animation (Only stars move) --- */
 .stars {
     position: fixed;
     top: 0;
@@ -57,7 +57,7 @@ body {
     100% { background-position: 100% 100%; }
 }
 
-/* --- Moscow Silhouette Overlay (Using Image Asset) --- */
+/* --- Moscow Silhouette Overlay (Uses Direct Image URL) --- */
 .invitation-container::before {
     content: '';
     position: absolute;
@@ -67,11 +67,11 @@ body {
     height: 350px;
     z-index: -1;
     
-    /* ** THIS USES THE NEW IMAGE FILE ** */
-    background-image: url('moscow-silhouette.png'); 
-    background-repeat: repeat-x; /* If the image is seamless, it can repeat */
+    /* ** USING THE DIRECT IMAGE URL ** */
+    background-image: url('http://googleusercontent.com/image_collection/image_retrieval/13013853423706791044_0'); 
+    background-repeat: no-repeat;
     background-position: bottom center;
-    background-size: cover; /* Ensures it covers the width */
+    background-size: cover; 
     opacity: 0.9;
     
     /* Subtle fade to blend the black silhouette with the navy background */
