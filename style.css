@@ -1,0 +1,391 @@
+/* --- Color Variables --- */
+:root {
+    --color-navy: #0A0A20; /* Darker Navy for space effect */
+    --color-gold: #C5B358;
+    --color-white: #FFFFFF;
+    --color-light-gold: #FFD700;
+    --color-accent-blue: #0A3D62;
+    --color-shadow: rgba(0, 0, 0, 0.7);
+}
+
+/* --- Base Styling --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--color-navy);
+    color: var(--color-white);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 60px 0; /* Add padding for better viewing on all screens */
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* --- Star Background Animation --- */
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    z-index: -2;
+    /* This creates the star field effect */
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, var(--color-white), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, var(--color-white), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 50px 160px, var(--color-light-gold), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 90px 40px, var(--color-white), rgba(0,0,0,0)),
+        /* Add more radial gradients for a dense star field */
+        radial-gradient(2px 2px at 150px 150px, var(--color-white), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 200px 220px, var(--color-light-gold), rgba(0,0,0,0)),
+        /* ... repeat and vary positions */
+        radial-gradient(2px 2px at 300px 50px, var(--color-white), rgba(0,0,0,0)); 
+    background-size: 300px 300px;
+    animation: twinkle 60s linear infinite;
+}
+
+@keyframes twinkle {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+/* --- Moscow Silhouette Overlay --- */
+.invitation-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    /* Placeholder for Moscow Skyline - Must be a subtle SVG or PNG */
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23050510" fill-opacity="0.8" d="M0,96L60,117.3C120,139,240,181,360,186.7C480,192,600,160,720,138.7C840,117,960,107,1080,112C1200,117,1320,139,1380,149.3L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>') no-repeat bottom center;
+    background-size: cover;
+    opacity: 0.2;
+}
+
+
+.invitation-container {
+    max-width: 900px;
+    width: 95%;
+    padding: 40px;
+    background: rgba(10, 10, 32, 0.85); /* Semi-transparent background */
+    box-shadow: 0 10px 40px var(--color-shadow);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    z-index: 1; /* Ensure content is above stars/silhouette */
+}
+
+/* --- Header & Titles --- */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-subtitle {
+    font-size: 0.9rem;
+    color: var(--color-white);
+    letter-spacing: 2px;
+    opacity: 0.7;
+    margin: 3px 0;
+}
+
+.hero {
+    text-align: center;
+}
+
+.flag-and-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+/* Russian Flag Styling (using CSS only for simplicity) */
+.russian-flag {
+    width: 50px;
+    height: 33px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.russian-flag::before, .russian-flag::after {
+    content: '';
+    flex: 1;
+}
+
+.russian-flag::before {
+    background-color: white; /* Top stripe */
+}
+.russian-flag {
+    background-color: blue; /* Middle stripe (main element) */
+}
+.russian-flag::after {
+    background-color: red; /* Bottom stripe */
+}
+
+
+.title-event {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    color: var(--color-gold);
+    text-shadow: 0 0 20px var(--color-light-gold);
+    letter-spacing: 2px;
+}
+
+.subtitle-moscow {
+    font-size: 1.1rem;
+    color: var(--color-white);
+    font-style: italic;
+    margin-bottom: 25px;
+    opacity: 0.9;
+}
+
+.date-time-location {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.date {
+    font-weight: 700;
+    color: var(--color-light-gold);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.time-block span {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--color-gold);
+}
+
+.location-text {
+    font-size: 0.95rem;
+    opacity: 0.8;
+    margin-top: 10px;
+}
+.location-text i {
+    color: #CC0000; /* Red for location pin */
+}
+
+/* --- Countdown Timer --- */
+.countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 25px 0;
+}
+
+.timer-unit {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--color-gold);
+    padding: 8px;
+    border-radius: 5px;
+    width: 80px;
+    box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+.timer-unit span {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--color-light-gold);
+    line-height: 1;
+}
+
+.timer-unit label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    color: var(--color-white);
+    opacity: 0.7;
+}
+
+
+.intro {
+    font-size: 1rem;
+    margin-bottom: 40px;
+    opacity: 0.8;
+    line-height: 1.5;
+}
+
+/* --- Details Section (Stylized Boxes) --- */
+.details-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 40px;
+}
+
+.detail-box {
+    flex: 1;
+    text-align: center;
+    padding: 15px 5px;
+    border: 1px solid rgba(255, 215, 0, 0.4);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.detail-box h3 {
+    color: var(--color-light-gold);
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.detail-box ul {
+    list-style: none;
+    padding: 0;
+    font-size: 0.9rem;
+}
+
+.detail-box li {
+    margin: 3px 0;
+}
+
+.gold-text { color: var(--color-light-gold); }
+.white-text { color: var(--color-white); }
+.navy-text { color: #87CEEB; /* Lighter Blue for visibility */ }
+
+.dress-code-elegant {
+    flex: 1.5;
+    background-color: rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+}
+
+.code-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.code-indicator span {
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-weight: 700;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 50%;
+    font-size: 1rem;
+    box-shadow: 0 0 8px var(--color-gold);
+}
+
+
+/* --- Registration Form --- */
+.registration-form-section {
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--color-light-gold);
+    margin-bottom: 25px;
+    text-shadow: 0 0 10px var(--color-light-gold);
+}
+
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 3px;
+    font-weight: 400;
+    color: var(--color-white);
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--color-gold);
+    border-radius: 3px;
+    color: var(--color-white);
+    font-size: 1rem;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.en-cours {
+    width: 100%;
+    text-align: left;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--color-gold);
+    font-weight: 700;
+    border: 1px solid var(--color-gold);
+    border-radius: 3px;
+    opacity: 0.6;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: var(--color-gold);
+    color: var(--color-navy);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+}
+
+.submit-btn:hover {
+    background-color: var(--color-light-gold);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 25px rgba(255, 215, 0, 0.8);
+}
+
+.form-message {
+    margin-top: 20px;
+    text-align: center;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--color-light-gold);
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* --- Media Queries for Responsiveness --- */
+@media (max-width: 768px) {
+    .title-event {
+        font-size: 2.5rem;
+    }
+    .details-section {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .timer-unit {
+        width: 65px;
+        padding: 6px;
+    }
+    .timer-unit span {
+        font-size: 1.5rem;
+    }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuit de la Traversée 2026 - Impact Centre Chrétien Russie Famile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="invitation-container">
+        
+        <header>
+            <p class="logo-subtitle">Impact Centre Chrétien Russie Famile</p>
+            <p class="logo-subtitle">Russie Famile</p>
+        </header>
+
+        <main class="hero">
+            <div class="flag-and-title">
+                <div class="russian-flag" title="Drapeau Russe"></div>
+                <h2 class="title-event">Nuit de la Traversée 2026</h2>
+            </div>
+            
+            <p class="subtitle-moscow">Une Nuit pour Traverser avec Foi à Moscou</p>
+
+            <div class="date-time-location">
+                <span class="date">MER. 31 DÉC. 2025</span>
+                <div class="time-block">
+                    <span>DE 20H00</span> <span>À 02:00</span>
+                </div>
+                <p class="location-text">
+                    <i class="fas fa-map-marker-alt"></i> Moscou, Russie
+                    <br>Likov Pereulok 2/3, BL. 1
+                </p>
+            </div>
+            
+            <div id="countdown" class="countdown-timer">
+                <div class="timer-unit"><span id="days">00</span><label>JOURS</label></div>
+                <div class="timer-unit"><span id="hours">00</span><label>HEURES</label></div>
+                <div class="timer-unit"><span id="minutes">00</span><label>MIN</label></div>
+                <div class="timer-unit"><span id="seconds">00</span><label>SEC</label></div>
+            </div>
+
+            <p class="intro">
+                L'Impact Centre Chrétien a l'honneur de vous inviter à un événement d'able de prière, 
+                <br>de louange et en commune amvre. Un pont ê foudes cœus, grut la trmrition au le-divine.
+            </p>
+
+            <div class="details-section">
+                <div class="detail-box">
+                    <h3>Details</h3>
+                    <ul>
+                        <li><span class="gold-text">OR (ЗОЛОТОЙ)</span></li>
+                        <li><span class="navy-text">BLEU MARINE (ТЕМНО-СИНИЙ)</span></li>
+                    </ul>
+                </div>
+                <div class="detail-box dress-code-elegant">
+                    <h3>Code Vestimentaire Élégant</h3>
+                    <div class="code-indicator">
+                        <span>1</span><span>2</span><span>3</span><span>3</span><span>1</span><span>7</span><span>6</span>
+                    </div>
+                </div>
+                <div class="detail-box">
+                    <h3>Dress Code</h3>
+                    <ul>
+                        <li><span class="white-text">BLANC (БЕЛЫЙ)</span></li>
+                        <li><span class="navy-text">BLEU MARINE (ТЕМНО-СИНИЙ)</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <section class="registration-form-section">
+                <h3 class="form-title">Réservez Votre Place pour cte Moment Sacré</h3>
+                
+                <form id="registrationForm">
+                    <div class="form-group">
+                        <label for="fullName">Nom & Prénom</label>
+                        <input type="text" id="fullName" name="fullName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Adresse Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Numéro de Téléphone (WhatsApp)</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="guests">Nombre d'Invités (y cumhie you)</label>
+                        <select id="guests" name="guests" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="10">5+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="en-cours">EN COURS...</div>
+
+                    <button type="submit" id="submitButton" class="submit-btn">CONFIRMER MA RÉSERVATION DIVINE</button>
+                    
+                    <p id="formMessage" class="form-message" aria-live="polite">
+                        ⭐ Votre place est assure! Que est travesse sei miracles.
+                        <br>Un email et en route.
+                    </p>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
